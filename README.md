@@ -10,6 +10,7 @@ Used technologies
 How to build and run
 
 * If your OS is windows then you can type windows-runner.bat on command line.
+* If your OS is based on linux kernel then you can type linux-runner.sh on terminal.
 * Otherwise, you should run commands below sequentially 
   * 1- mvnw clean 
   * 2- mvnw compile
