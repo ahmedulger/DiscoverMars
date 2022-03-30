@@ -75,7 +75,7 @@ public class CommandLineParser {
 
     private String getSingleArg(int index, String argName) {
         if (index >= args.size()) {
-            throw new IllegalArgumentException("Argument is required with name: " + argName + " and index: " + index);
+            throw new IllegalArgumentException("Argument required. Missing argument on line Number: " + (index + 1) + ". Argument description: " + argName);
         }
 
         return args.get(index);
