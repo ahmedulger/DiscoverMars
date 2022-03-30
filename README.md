@@ -14,9 +14,13 @@ How to build and run
   * 1- mvnw clean 
   * 2- mvnw compile
   * 3- mvnw exec:java -Dexec.args=[args]. You can check windows-runner.bat file to see example argument using.
-* It is hard to see output on command line. After last command completed the text below will be printed on console.
-  <pre>[INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ hepsiburada ---
+* Result will be written on console like below.
+  <pre>
+  *************************
+  ******** RESULT *********
+  *************************
   1 3 N
   5 1 E
-  [INFO] ------------------------------------------------------------------------
+  *************************
+  *************************
   </pre>

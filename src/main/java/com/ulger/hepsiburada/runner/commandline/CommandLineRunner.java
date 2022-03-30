@@ -9,6 +9,7 @@ import com.ulger.hepsiburada.runner.commandline.parser.ParsingContext;
 import com.ulger.hepsiburada.runner.commandline.printer.RoverPrinter;
 
 import java.util.Collection;
+import java.util.List;
 
 public class CommandLineRunner {
 
@@ -27,11 +28,28 @@ public class CommandLineRunner {
             Collection<DirectionType> directionTypes = roverWithDirections.getDirectionTypes();
 
             roverDirector.run(rover, directionTypes);
-            roverPrinter.print(rover);
         }
+
+        printResult(parsingContext.getRoversWithDirections());
     }
 
     private ParsingContext parseArgs(String[] args) {
         return CommandLineParser.of(args).parse();
+    }
+
+    private void printResult(List<RoverWithDirections> roversWithDirections) {
+
+        System.out.println("*************************");
+        System.out.println("******** RESULT *********");
+        System.out.println("*************************");
+
+        roversWithDirections
+                .stream()
+                .map(RoverWithDirections::getRover)
+                .forEach(roverPrinter::print);
+
+        System.out.println("*************************");
+        System.out.println("*************************");
+
     }
 }

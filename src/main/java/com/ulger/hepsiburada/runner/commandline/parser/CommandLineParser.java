@@ -3,6 +3,8 @@ package com.ulger.hepsiburada.runner.commandline.parser;
 import com.ulger.hepsiburada.app.api.*;
 import com.ulger.hepsiburada.runner.DirectionType;
 import com.ulger.hepsiburada.runner.RoverWithDirections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -10,6 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CommandLineParser {
+
+    private static final Logger logger = LoggerFactory.getLogger(CommandLineParser.class);
 
     private final List<String> args;
     private final ParsingContext parsingContext;
@@ -30,6 +34,8 @@ public class CommandLineParser {
     }
 
     private CommandLineParser parsePlateauEndingLocations() {
+        logger.info("Parsing plateau information");
+
         String plateauEndLocationTextX = getSingleArg(0, ParsingContextField.PLATEAU_END_LOCATION_X);
         String plateauEndLocationTextY = getSingleArg(1, ParsingContextField.PLATEAU_END_LOCATION_Y);
 
@@ -41,6 +47,10 @@ public class CommandLineParser {
 
         Plateau plateau = new DefaultPlateau(plateStartingLocation, plateEndingLocation);
         parsingContext.setPlateau(plateau);
+
+        logger.info("Plateau information parsed. Plateau starting coordinates: {} and ending coordinates: {}",
+                plateau.getStartingLocation(),
+                plateau.getEndingLocation());
 
         return this;
     }
@@ -92,16 +102,23 @@ public class CommandLineParser {
             String rowerPosition,
             String rowerDirections) {
 
+        logger.info("Parsing rover information with directions. RoverId: {}", rowerId);
+
         Location location = buildRowerLocation(rowerLocationX, rowerLocationY);
         Position position = buildRoverPosition(rowerPosition);
         List<DirectionType> directions = buildDirections(rowerDirections);
 
         Rover rover = new DefaultRover(rowerId, location, position, parsingContext.getPlateau());
 
+        logger.info("Rover information with directions parsed. RoverId: {}", rowerId);
+
         return new RoverWithDirections(rover, directions);
     }
 
     private Location buildRowerLocation(String rowerLocationX, String rowerLocationY) {
+
+        logger.info("Parsing rover location. Coordinates X: {} and Y: {}", rowerLocationX, rowerLocationY);
+
         if (rowerLocationX == null || rowerLocationX.equals("")) {
             throw new IllegalArgumentException("Rover location X is required");
         }
@@ -116,6 +133,8 @@ public class CommandLineParser {
     }
 
     private Position buildRoverPosition(String rowerPosition) {
+        logger.info("Parsing rover position. Position: {}", rowerPosition);
+
         if (rowerPosition == null || rowerPosition.equals("")) {
             throw new IllegalArgumentException("Rover position is required");
         }
@@ -126,6 +145,8 @@ public class CommandLineParser {
     }
 
     private List<DirectionType> buildDirections(String rowerDirectionsText) {
+        logger.info("Parsing rover directions. rowerDirectionsText: {}", rowerDirectionsText);
+
         if (rowerDirectionsText == null || rowerDirectionsText.equals("")) {
             throw new IllegalArgumentException("Rover direction list is required");
         }

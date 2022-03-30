@@ -1,10 +1,11 @@
 package com.ulger.hepsiburada.app.api;
 
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractCommendable implements Commendable {
 
-    private static final Logger logger = Logger.getLogger(AbstractCommendable.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(AbstractCommendable.class);
 
     private static final int GRID_POINT = 1;
 
@@ -61,12 +62,19 @@ public abstract class AbstractCommendable implements Commendable {
 
         if (newLocationX > getEndingBoundaries().getX()) {
             boundaryViolated = true;
+            logger.error("Plateau X axis boundaries violated. MaxPointX: {}, aimedPointX: {}", getEndingBoundaries().getX(), newLocationX);
+
         } else if (newLocationY > getEndingBoundaries().getY()) {
             boundaryViolated = true;
+            logger.error("Plateau Y axis boundaries violated. MaxPointY: {}, aimedPointY: {}", getEndingBoundaries().getY(), newLocationY);
+
         } else if (newLocationX < getStartingBoundaries().getX()) {
             boundaryViolated = true;
+            logger.error("Plateau X axis boundaries violated. MinPointX: {}, aimedPointX: {}", getStartingBoundaries().getX(), newLocationX);
+
         } else if (newLocationY < getStartingBoundaries().getY()) {
             boundaryViolated = true;
+            logger.error("Plateau Y axis boundaries violated. MinPointY: {}, aimedPointY: {}", getStartingBoundaries().getY(), newLocationY);
         }
 
         if (boundaryViolated) {

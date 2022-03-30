@@ -1,9 +1,14 @@
 package com.ulger.hepsiburada.app.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class DefaultPlateau implements Plateau {
+
+    private static final Logger logger = LoggerFactory.getLogger(DefaultPlateau.class);
 
     private final Location startingLocation;
     private final Location endingLocation;
@@ -40,5 +45,10 @@ public class DefaultPlateau implements Plateau {
     @Override
     public void addRover(Rover rover) {
         rovers.add(rover);
+
+        logger.info("Added new rover to plateau. RoverId: {}, RoverLocation: {}, RoverPosition: {}",
+                rover.getId(),
+                rover.getLocation(),
+                rover.getPosition());
     }
 }

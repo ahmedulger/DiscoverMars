@@ -1,8 +1,13 @@
 package com.ulger.hepsiburada.app.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 
 public class DefaultRover extends AbstractCommendable implements Rover {
+
+    private static final Logger logger = LoggerFactory.getLogger(DefaultRover.class);
 
     private final int id;
     private Location location;
@@ -44,18 +49,21 @@ public class DefaultRover extends AbstractCommendable implements Rover {
     @Override
     public Position turnRight() {
         this.position = super.turnRight();
+        logger.info("Rover with id: {} turned right and new position: {}", id, position);
         return position;
     }
 
     @Override
     public Position turnLeft() {
         this.position = super.turnLeft();
+        logger.info("Rover with id: {} turned left and new position: {}", id, position);
         return position;
     }
 
     @Override
     public Location moveForward() {
         this.location = super.moveForward();
+        logger.info("Rover with id: {} moved forward and new location: {}", id, location);
         return location;
     }
 
