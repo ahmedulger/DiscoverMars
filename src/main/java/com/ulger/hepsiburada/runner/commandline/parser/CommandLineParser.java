@@ -48,6 +48,10 @@ public class CommandLineParser {
     private CommandLineParser parseRoversWithDirections() {
 
         int partitionCount = (args.size() - 2) / 4;
+        if (partitionCount < 1) {
+            throw new IllegalArgumentException("At least one rover is required");
+        }
+
         int rowerId = 0;
 
         for (int partitionIndex = 0; partitionIndex < partitionCount; partitionIndex++) {
