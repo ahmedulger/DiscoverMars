@@ -1,6 +1,6 @@
 ./mvnw clean
 ./mvnw compile
-./mvnw exec:java -Dexec.args= \
+./mvnw exec:java -Dexec.args=\
 "5 5 \
 1 2 N \
 LMLMLMLMM \
